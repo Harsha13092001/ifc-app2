@@ -5,6 +5,7 @@ import { GisParameters, Building, LngLat } from "./types";
 import { MAPBOX_KEY } from "../../config";
 import { User } from "firebase/auth";
 import { MapDatabase } from "./map-database";
+import { Events } from "../../middleware/event-handler";
 
 export class MapScene {
   private map: mapboxgl.Map;
@@ -12,8 +13,10 @@ export class MapScene {
   private center: LngLat = { lat: 0, lng: 0 };
   private labels: { [id: string]: CSS2DObject } = {};
   private database = new MapDatabase();
+  private events: Events;
 
-  constructor(container: HTMLDivElement) {
+  constructor(container: HTMLDivElement, events: Events) {
+    this.events = events;
     const config = this.getConfig(container);
     this.map = this.createMap(config);
     this.createScene();
@@ -45,7 +48,7 @@ export class MapScene {
     for (const building of buildings) {
       const { uid, lng, lat } = building;
 
-      const htmlElement = this.createHTMLElement();
+      const htmlElement = this.createHTMLElement(uid);
 
       const label = new CSS2DObject(htmlElement);
 
@@ -66,9 +69,12 @@ export class MapScene {
     }
   }
 
-  private createHTMLElement() {
+  private createHTMLElement(id: string) {
     const div = document.createElement("div");
     div.textContent = "🏢";
+    div.onclick = () => {
+        this.events.trigger({ type: "OPEN_BUILDING", payload: id });
+      };
     div.classList.add("thumbnail");
     return div;
   }
@@ -108,7 +114,7 @@ export class MapScene {
     this.center = { lng: center[0], lat: center[1] }; // Optionally, you can assign this.center for consistency
     return {
       container,
-      zoom: 15.35,
+      zoom: 20.35,
       pitch: 60,
       bearing: -40,
       center, // Modify center to be an array of numbers
