@@ -4,6 +4,8 @@ import ErrorIcon from "@mui/icons-material/GppMaybe";
 import FloorplanIcon from "@mui/icons-material/FindInPage";
 import ModelsIcon from "@mui/icons-material/HolidayVillage";
 import ListIcon from "@mui/icons-material/ViewList";
+import { State } from "../../../middleware/state";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { Action } from "../../../middleware/actions";
 
 interface SideTool {
@@ -12,10 +14,13 @@ interface SideTool {
   action: () => void;
 }
 
-export function getSidebarTools(dispatch: React.Dispatch<Action>): SideTool[] {
+export function getSidebarTools(
+    state: State,
+    dispatch: React.Dispatch<Action>
+  ): SideTool[] {
   return [
     {
-      name: "Properties",
+      name: "Info",
       icon: <ListIcon />,
       action: () => {
         console.log("Models!");
@@ -49,6 +54,13 @@ export function getSidebarTools(dispatch: React.Dispatch<Action>): SideTool[] {
         dispatch({ type: "CLOSE_BUILDING" });
       },
     },
+    {
+        name: "Delete building",
+        icon: <DeleteIcon />,
+        action: () => {
+          dispatch({ type: "DELETE_BUILDING", payload: state.building });
+        },
+      },
     {
       name: "Log out",
       icon: <LogoutIcon />,
