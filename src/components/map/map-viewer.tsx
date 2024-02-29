@@ -30,10 +30,7 @@ export const MapViewer: FC = () => {
       dispatch({ type: "START_MAP", payload: { container, user, thumbnail } });
     }
 
-    return () => {
-      dispatch({ type: "REMOVE_MAP" });
-    };
-  }, []);
+    }, []);
 
   if (!user) {
     return <Navigate to="/login" />;
