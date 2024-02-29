@@ -4,9 +4,9 @@ import ErrorIcon from "@mui/icons-material/GppMaybe";
 import FloorplanIcon from "@mui/icons-material/FindInPage";
 import ModelsIcon from "@mui/icons-material/HolidayVillage";
 import ListIcon from "@mui/icons-material/ViewList";
-import { State } from "../../../middleware/state";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Action } from "../../../middleware/actions";
+import { State } from "../../../middleware/state";
 import { FrontMenuMode } from "../front-menu/types";
 
 interface SideTool {
@@ -16,10 +16,10 @@ interface SideTool {
 }
 
 export function getSidebarTools(
-    state: State,
-    dispatch: React.Dispatch<Action>,
-    toggleMenu: (active?: boolean, mode?: FrontMenuMode) => void
-  ): SideTool[] {
+  state: State,
+  dispatch: React.Dispatch<Action>,
+  toggleMenu: (active?: boolean, mode?: FrontMenuMode) => void
+): SideTool[] {
   return [
     {
       name: "Info",
@@ -32,21 +32,7 @@ export function getSidebarTools(
       name: "Models",
       icon: <ModelsIcon />,
       action: () => {
-        console.log("Models!");
-      },
-    },
-    {
-      name: "Floorplans",
-      icon: <FloorplanIcon />,
-      action: () => {
         toggleMenu(true, "ModelList");
-      },
-    },
-    {
-      name: "Issues",
-      icon: <ErrorIcon />,
-      action: () => {
-        console.log("Models!");
       },
     },
     {
@@ -57,12 +43,12 @@ export function getSidebarTools(
       },
     },
     {
-        name: "Delete building",
-        icon: <DeleteIcon />,
-        action: () => {
-          dispatch({ type: "DELETE_BUILDING", payload: state.building });
-        },
+      name: "Delete building",
+      icon: <DeleteIcon />,
+      action: () => {
+        dispatch({ type: "DELETE_BUILDING", payload: state.building });
       },
+    },
     {
       name: "Log out",
       icon: <LogoutIcon />,
