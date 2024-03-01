@@ -29,8 +29,9 @@ export interface LngLat {
 
 export interface Tool {
   name: string;
+  active: boolean;
   icon: any;
-  action: () => void;
+  action: (...args: any) => void;
 }
 export interface Floorplan {
   name: string;

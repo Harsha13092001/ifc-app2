@@ -48,10 +48,11 @@ export class BuildingScene {
     this.components.tools.add(grid);
 
     this.fragments = new OBC.Fragments(this.components);
-
-    const selectMat = new THREE.MeshBasicMaterial({ color: "white" });
+    
+    this.fragments.highlighter.active = true;
+    const selectMat = new THREE.MeshBasicMaterial({ color: "#1976D2" });
     const preselectMat = new THREE.MeshBasicMaterial({
-      color: "white",
+      color: "#1976D2",
       opacity: 0.5,
       transparent: true,
     });
@@ -62,6 +63,8 @@ export class BuildingScene {
     this.setupEvents();
 
     this.loadAllModels(building);
+
+    this.fragments.exploder.groupName = "floor";
   }
 
   dispose() {
@@ -71,6 +74,15 @@ export class BuildingScene {
     this.fragments.dispose();
     (this.components as any) = null;
     (this.fragments as any) = null;
+  }
+
+  explode(active: boolean) {
+    const exploder = this.fragments.exploder;
+    if (active) {
+      exploder.explode();
+    } else {
+      exploder.reset();
+    }
   }
 
   async convertIfcToFragments(ifc: File) {
