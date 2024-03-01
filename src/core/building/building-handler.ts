@@ -12,7 +12,6 @@ export const buildingHandler = {
 
   remove() {
     if (this.viewer) {
-      console.log("building disposed!");
       this.viewer.dispose();
       this.viewer = null;
     }
@@ -24,10 +23,19 @@ export const buildingHandler = {
     }
     return this.viewer.convertIfcToFragments(ifc);
   },
- 
-  async deleteModel(id: string) {
+
+  async deleteModels(ids: string[]) {
     if (this.viewer) {
-      await this.viewer.database.deleteModel(id);
+      await this.viewer.database.deleteModels(ids);
+    }
+  },
+
+  async refreshModels(building: Building) {
+    if (this.viewer) {
+      const container = this.viewer.container;
+      this.viewer.dispose();
+      this.viewer = null;
+      this.viewer = new BuildingScene(container, building);
     }
   },
 };

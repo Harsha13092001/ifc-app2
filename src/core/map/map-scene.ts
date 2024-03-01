@@ -139,9 +139,9 @@ export class MapScene {
     return {
       container,
       accessToken: MAPBOX_KEY,
-      zoom:20.35,
-      pitch: 60,
-      bearing: -40,
+      zoom:20,
+      pitch: 30,
+      bearing: -30,
       center,
       buildings: [],
     };
