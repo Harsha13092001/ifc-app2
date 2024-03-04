@@ -1,4 +1,4 @@
-import MapIcon from "@mui/icons-material/Map";
+import MyLocationIcon from '@mui/icons-material/MyLocation';
 import LogoutIcon from "@mui/icons-material/Logout";
 import ModelsIcon from "@mui/icons-material/HolidayVillage";
 import ListIcon from "@mui/icons-material/ViewList";
@@ -26,7 +26,7 @@ export function getSidebarTools(): Tool[] {
     {
       name: "Map",
       active: false,
-      icon: <MapIcon />,
+      icon: <MyLocationIcon />,
       action: ({ dispatch }) => {
         dispatch({ type: "CLOSE_BUILDING" });
       },
