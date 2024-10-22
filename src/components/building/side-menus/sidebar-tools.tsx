@@ -5,6 +5,7 @@ import ListIcon from "@mui/icons-material/ViewList";
 import FloorplanIcon from "@mui/icons-material/Layers";
 import PropertiesIcon from "@mui/icons-material/Info";
 import DeleteIcon from "@mui/icons-material/Delete";
+import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import { Tool } from "../../../types";
 
 export function getSidebarTools(): Tool[] {
@@ -31,6 +32,14 @@ export function getSidebarTools(): Tool[] {
       icon: <FloorplanIcon />,
       action: ({ onToggleMenu }) => {
         onToggleMenu(true, "Floorplans");
+      },
+    },
+    {
+      name: "Spatialtree",
+      active: false,
+      icon: <AccountTreeIcon />,
+      action: ({ onToggleMenu }) => {
+        onToggleMenu(true, "Spatialtree");
       },
     },
     {

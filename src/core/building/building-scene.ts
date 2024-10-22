@@ -189,7 +189,7 @@ export class BuildingScene {
   }
 
   private createClippingPlane = (event: KeyboardEvent) => {
-    if (event.code === "KeyP") {
+    if (event.code === "KeyS") {
       const clipper = this.getClipper();
       if (clipper) {
         clipper.create();

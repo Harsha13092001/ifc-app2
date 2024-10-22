@@ -13,6 +13,7 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyC5qGo1lB2IZ5XsmHVhxqHJIcblFK28vGA",
@@ -23,7 +24,8 @@ const firebaseConfig = {
   appId: "1:9537290639:web:bd9d85b45f9cd976264bfa"
 };
 
-initializeApp(firebaseConfig);
+// Initialize Firebase
+ initializeApp(firebaseConfig);
 
 root.render(
   <React.StrictMode>

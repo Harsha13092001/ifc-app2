@@ -1,6 +1,7 @@
 import ExplodeIcon from "@mui/icons-material/ImportExport";
 import CutIcon from "@mui/icons-material/ContentCut";
-import RulerIcon from "@mui/icons-material/Straighten";
+import SquareFootIcon from '@mui/icons-material/SquareFoot';
+import ModeIcon from '@mui/icons-material/Mode';
 import { Tool } from "../../../types";
 
 export function getBottombarTools(): Tool[] {
@@ -18,7 +19,7 @@ export function getBottombarTools(): Tool[] {
     },
     {
       name: "Dimensions",
-      icon: <RulerIcon />,
+      icon: <SquareFootIcon />,
       active: false,
       action: (dispatch: any) => {
         const tool = findTool("Dimensions");
@@ -36,6 +37,17 @@ export function getBottombarTools(): Tool[] {
         deactivateAllTools(dispatch, "Explosion");
         tool.active = !tool.active;
         dispatch({ type: "EXPLODE_MODEL", payload: tool.active });
+      },
+    },
+    {
+      name: "Annotation",
+      icon: <ModeIcon />,
+      active: false,
+      action: (dispatch: any) => {
+        const tool = findTool("Annotation");
+        deactivateAllTools(dispatch, "Annotation");
+        tool.active = !tool.active;
+        dispatch({ type: "DRAW_MANAGER ", payload: tool.active });
       },
     },
   ];

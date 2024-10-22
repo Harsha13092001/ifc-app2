@@ -17,5 +17,8 @@ export const reducer = (state: State, action: Action) => {
   if (action.type === "UPDATE_PROPERTIES") {
     return { ...state, properties: action.payload };
   }
+  if (action.type === "UPDATE_TREE") {
+    return { ...state, properties: action.payload };
+  }
   return { ...state };
 };

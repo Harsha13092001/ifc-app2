@@ -57,7 +57,11 @@ export const buildingHandler = {
       this.viewer.toggleDimensions(active);
     }
   },
-  
+  // annotation(active: boolean, floorplan?: Floorplan) {
+  //   if (this.viewer) {
+  //     this.viewer.annotation(active, floorplan);
+  //   }
+  // },
   toggleFloorplan(active: boolean, floorplan?: Floorplan) {
     if (this.viewer) {
       this.viewer.toggleFloorplan(active, floorplan);

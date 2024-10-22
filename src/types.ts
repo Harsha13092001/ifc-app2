@@ -42,3 +42,7 @@ export interface Property {
   name: string;
   value: string;
 }
+export interface Tree {
+  name: string;
+  value: string;
+}
