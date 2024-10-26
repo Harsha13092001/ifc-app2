@@ -19,7 +19,7 @@ function App() {
         </div>
       </Router>
     </ContextProvider>
-  );
+  );               
 }
 
 export default App;

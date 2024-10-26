@@ -62,11 +62,31 @@ export const databaseHandler = {
   },
 
   deleteModel: async (model: Model, building: Building, events: Events) => {
+  try {
     const appInstance = getApp();
     const storageInstance = getStorage(appInstance);
+    
+    // Check if the model exists in the building before attempting to delete
+    const modelIndex = building.models.findIndex(m => m.id === model.id);
+    if (modelIndex === -1) {
+      console.error("Model not found for deletion:", model.id);
+      return; // Exit if the model isn't found
+    }
+
+    // Reference to the model's file in storage
     const fileRef = ref(storageInstance, model.id);
+    
+    // Delete the file from storage
     await deleteObject(fileRef);
+    
+    // Refresh models and trigger event after successful deletion
     await buildingHandler.refreshModels(building, events);
     events.trigger({ type: "UPDATE_BUILDING", payload: building });
-  },
+    
+    console.log("Model deleted successfully:", model.id);
+  } catch (error) {
+    console.error("Error deleting model:", error);
+  }
+},
+
 };

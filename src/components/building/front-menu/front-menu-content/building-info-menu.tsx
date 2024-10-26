@@ -7,38 +7,30 @@ export const BuildingInfoMenu: FC<{
   onToggleMenu: (active: boolean) => void;
 }> = ({ onToggleMenu }) => {
   const [state, dispatch] = useAppContext();
-
   const { building } = state;
+
   if (!building) {
     throw new Error("No building active!");
   }
 
-  const newBuilding = { ...building } as any;
-
   const onUpdateBuilding = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const newBuilding = { ...building } as any;
-    newBuilding.name = data.get("building-name") || building.name;
-    newBuilding.lat = data.get("building-lat") || building.lat;
-    newBuilding.lng = data.get("building-lng") || building.lng;
-    dispatch({ type: "UPDATE_BUILDING", payload: newBuilding });
     onToggleMenu(false);
   };
 
   return (
     <Box component="form" onSubmit={onUpdateBuilding} className="full-width">
-    <div className="list-item">
-      <TextField
-        required
-        fullWidth
-        id="building-id"
-        label="Building ID"
-        name="building-id"
-        autoComplete="building-id"
-        value={building.uid}
-        disabled={true}
-      />
+      <div className="list-item">
+        <TextField
+          required
+          fullWidth
+          id="building-id"
+          label="Building ID"
+          name="building-id"
+          autoComplete="building-id"
+          value={building.uid}
+          disabled
+        />
       </div>
       <div className="list-item">
         <TextField
@@ -47,7 +39,9 @@ export const BuildingInfoMenu: FC<{
           label="Building Name"
           name="building-name"
           autoComplete="building-name"
-          defaultValue={building.name}
+          value={building.name} // Set to uploaded file name
+          multiline
+          disabled // Make it non-editable
         />
       </div>
       <div className="list-item">
@@ -58,7 +52,8 @@ export const BuildingInfoMenu: FC<{
           label="Longitude"
           name="building-lng"
           autoComplete="building-lng"
-          defaultValue={building.lng}
+          value={building.lng}
+          disabled
         />
       </div>
       <div className="list-item">
@@ -69,11 +64,12 @@ export const BuildingInfoMenu: FC<{
           label="Latitude"
           name="building-lat"
           autoComplete="building-lat"
-          defaultValue={building.lat}
+          value={building.lat}
+          disabled
         />
       </div>
       <div className="list-item">
-      <Button type="submit" className="submit-button">
+        <Button type="submit" className="submit-button">
           Update building
         </Button>
       </div>
